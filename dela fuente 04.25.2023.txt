@@ -1,0 +1,45 @@
+ACTIVITY #2
+1)
+SELECT CONCAT (fname, " ", lname) AS
+	FullName,
+    schedule.session, 
+    schedule.activity, 
+    schedule.date, 
+    schedule.time_start, 
+    trainor.name 
+FROM client_member 
+INNER JOIN  schedule ON schedule.client_ID = client_member.client_ID 
+INNER JOIN trainor ON trainor.sched_ID = schedule.sched_ID
+
+2)
+SELECT CONCAT (fname, " ", lname) AS
+	FullName,
+    transaction_records.amount,
+    payment.amount,
+    membership.status
+FROM client_member
+INNER JOIN transaction_records ON transaction_records.client_ID = client_member.client_ID
+INNER JOIN payment ON payment.client_ID = client_member.client_ID
+INNER JOIN membership ON membership.client_ID = client_member.client_ID
+
+
+ACTIVITY #3
+1)
+SELECT CONCAT (fname, " ", lname) AS
+	FullName,
+    trainor.name,
+    transaction_records.amount,
+    payment.amount
+FROM client_member
+INNER JOIN transaction_records ON transaction_records.client_ID = client_member.client_ID
+INNER JOIN payment ON payment.client_ID = client_member.client_ID
+
+2)
+SELECT trainor.name,
+	CONCAT (fname, " ", lname) AS FullName,
+    schedule.session,
+    schedule.time_start,
+    schedule.time_end
+FROM client_member
+INNER JOIN schedule ON schedule.client_ID = client_member.client_ID
+INNER JOIN trainor ON trainor.sched_ID = schedule.sched_ID
