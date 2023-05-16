@@ -1,0 +1,43 @@
+DELA FUENTE, Karl Dominique T.
+BSIT - 202
+Midterms 
+Test I
+
+DROP DATABASE normalization;
+CREATE DATABASE normalization;
+USE normalization;
+
+CREATE TABLE StudentInfo(
+	StudNo varchar(255) PRIMARY KEY,
+    StudFName varchar(255),
+    StudLName varchar(255),
+    Gender enum("F","M"),
+    HomeAddress varchar(255),
+    CourseCode varchar(255),
+    SubjCode varchar(255)
+);
+
+CREATE TABLE Grade(
+	GradeID varchar(255) PRIMARY KEY,
+    SubjCode varchar(255),
+    SubjDescr varchar(255),
+    Grade float
+);
+
+CREATE TABLE Subject(
+	SubjCode varchar(255) PRIMARY KEY,
+    SubjDescr varchar(255),
+    GradeID varchar(255),
+    StudNo varchar(255),
+    CONSTRAINT FK_Subject FOREIGN KEY(StudNo) REFERENCES StudentInfo(StudNo),
+    FOREIGN KEY(GradeID) REFERENCES Grade(GradeID)
+);
+
+CREATE TABLE Major(
+	CourseCode varchar(255) PRIMARY KEY,
+    SubjCode varchar(255),
+    SubjDescr varchar(255),
+    StudNo varchar(255),
+    CONSTRAINT FK_Major FOREIGN KEY(StudNo) REFERENCES StudentInfo(StudNo),
+    FOREIGN KEY(SubjCode) REFERENCES Subject(SubjCode)
+);
